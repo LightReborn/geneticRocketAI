@@ -1,12 +1,10 @@
 #ifndef SETTINGS
 #define SETTINGS
 
-class Settings {
-public:
-	const float movementMagnitudeFloor = 1.0;
-	const float movementMagnitudeCeiling = 5.0;
-	const float angleAdjustmentMagnitudeFloor = 1.0;
-	const float angleAdjustmentMagnitudeCeiling = 5.0;
-};
+#define MOVE_MAGNITUDE_FLOOR 1.0
+#define MOVE_MAGNITUDE_CEILING 5.0
+#define ANGLE_MAGNITUDE_FLOOR -5.0
+#define ANGLE_MAGNITUDE_CEILING 5.0
+#define DNA_LENGTH 100
 
 #endif

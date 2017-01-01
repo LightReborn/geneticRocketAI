@@ -1,0 +1,12 @@
+﻿  Rocket.cpp
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(17): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(23): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(46): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(54): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(62): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\ryan\documents\github\geneticrocketai\src\geneticrocketai\rocket.cpp(69): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  driver.cpp
+  Generating Code...
+  geneticRocketAI.vcxproj -> C:\Users\Ryan\Documents\GitHub\geneticRocketAI\src\x64\Debug\geneticRocketAI.exe
+  geneticRocketAI.vcxproj -> C:\Users\Ryan\Documents\GitHub\geneticRocketAI\src\x64\Debug\geneticRocketAI.pdb (Partial PDB)
