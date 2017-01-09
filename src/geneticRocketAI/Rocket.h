@@ -1,17 +1,19 @@
 #pragma once
 
 #include <iterator>
-#include "settings.h"
 #include "Genetics.h"
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+
+#define ROCKET_SPEED (5)
 
 class Rocket {
 
 private:
 	//data members
 	GeneticCode DNA;
+	GeneticCode executedDNA;
 	float xPosition, yPosition;
 	float angle;
 
@@ -30,8 +32,13 @@ public:
 	void generateRandomDNA();
 	void copyGenesInto(GeneticCode& outboundDNA);
 	void copyGenesFrom(GeneticCode inboundDna);
+	GeneticCode breedWith(Rocket mateRocket);
+	void executeGene(Gene commandSet);
+	void stepDNA();
+	void executeDNA();
 	void move(float magnitude);
 	void turn(float degrees);
 	float getX();
 	float getY();
+	bool DNAIsExecuted();
 };

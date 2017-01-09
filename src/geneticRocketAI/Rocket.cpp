@@ -1,6 +1,5 @@
 #include "Rocket.h"
 
-//Private Method members
 GeneMessage Rocket::generateRandomCommandType() {
 	int randomMessage = rand() % 2;
 	switch (randomMessage) {
@@ -43,7 +42,6 @@ Rocket::Rocket() {
 	yPosition = 0;
 	angle = 0;
 	generateRandomDNA();
-	srand(time(NULL));
 }
 
 Rocket::Rocket(float x, float y) {
@@ -51,7 +49,6 @@ Rocket::Rocket(float x, float y) {
 	yPosition = y;
 	angle = 0;
 	generateRandomDNA();
-	srand(time(NULL));
 }
 
 Rocket::Rocket(GeneticCode inboundDNA) {
@@ -59,14 +56,12 @@ Rocket::Rocket(GeneticCode inboundDNA) {
 	yPosition = 0;
 	angle = 0;
 	DNA = inboundDNA;
-	srand(time(NULL));
 }
 
 Rocket::Rocket(float x, float y, GeneticCode inboundDNA) {
 	xPosition = x;
 	yPosition = y;
 	DNA = inboundDNA;
-	srand(time(NULL));
 }
 
 void Rocket::generateRandomDNA() {
@@ -86,9 +81,46 @@ void Rocket::copyGenesFrom(GeneticCode inboundDna) {
 	DNA = inboundDna;
 }
 
+//todo
+GeneticCode Rocket::breedWith(Rocket mateRocket) {
+	//todo: determine how breeding two DNA strands will work, and implement.
+	GeneticCode newDNA;
+	return newDNA;
+}
+
+void Rocket::executeGene(Gene commandSet) {
+	if (commandSet.commandType == MOVE_FORWARD) {
+		move(commandSet.magnitude);
+	}
+	else if (commandSet.commandType == ADJUST_ANGLE) {
+		turn(commandSet.magnitude);
+	}
+}
+
+void Rocket::stepDNA() {
+	//save the gene that is going to be executed.
+	if (DNA.size() > 0) {
+		executedDNA.push_back(DNA.back());
+		//deploy execution of gene.
+		executeGene(DNA.back());
+		//remove from DNA
+		DNA.pop_back();
+	}
+	//DNA.size = DNA.size - 1 && exectuedDNA = executedDNA.size + 1
+	//DAN = #DNA - DNA.back && executedDNA = executedDNA + DNA.back
+}
+
+void Rocket::executeDNA() {
+	for (auto geneToExecute : DNA) {
+		executeGene(geneToExecute);
+	}
+}
+
 void Rocket::move(float magnitude) {
-	xPosition += (sin(angle) * magnitude);
-	yPosition -= (cos(angle) * magnitude);
+	printf("pre-move: (%f, %f)  ", xPosition, yPosition);
+	this->xPosition += (sin(this->angle) * (magnitude * ROCKET_SPEED));
+	this->yPosition -= (cos(this->angle) * (magnitude * ROCKET_SPEED));
+	printf("post move: (%f,%f)", xPosition, yPosition);
 }
 
 void Rocket::turn(float magnitude) {
@@ -101,4 +133,11 @@ float Rocket::getX() {
 
 float Rocket::getY() {
 	return yPosition;
+}
+
+bool Rocket::DNAIsExecuted() {
+	if (DNA.size() > 0) {
+		return false;
+	}
+	return true;
 }
