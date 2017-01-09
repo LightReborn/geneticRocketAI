@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="settings.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Genetics.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -32,5 +29,8 @@
     <ClCompile Include="driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
