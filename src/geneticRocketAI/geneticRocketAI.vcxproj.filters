@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Genetics.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Rocket.h">
       <Filter>Source Files</Filter>
     </ClInclude>
