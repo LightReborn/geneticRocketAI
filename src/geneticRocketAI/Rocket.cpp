@@ -51,21 +51,20 @@ Rocket::Rocket(float x, float y) {
 	generateRandomDNA();
 }
 
-Rocket::Rocket(GeneticCode inboundDNA) {
+Rocket::Rocket(GeneticCode& inboundDNA) {
 	xPosition = 0;
 	yPosition = 0;
 	angle = 0;
 	DNA = inboundDNA;
 }
 
-Rocket::Rocket(float x, float y, GeneticCode inboundDNA) {
+Rocket::Rocket(float x, float y, GeneticCode& inboundDNA) {
 	xPosition = x;
 	yPosition = y;
 	DNA = inboundDNA;
 }
 
 void Rocket::generateRandomDNA() {
-	//todo: Instantiate a list of genes.
 	//If DNA was already instantiated this will overwrite the genetic code.
 	DNA.clear();
 	for (int i = 0; i < DNA_LENGTH; i++) {
@@ -77,15 +76,34 @@ void Rocket::copyGenesInto(GeneticCode& outboundDNA) {
 	std::copy(DNA.begin(), DNA.end(), std::back_insert_iterator<GeneticCode>(outboundDNA));
 }
 
-void Rocket::copyGenesFrom(GeneticCode inboundDna) {
+void Rocket::copyGenesFrom(GeneticCode& inboundDna) {
 	DNA = inboundDna;
 }
 
-//todo
-GeneticCode Rocket::breedWith(Rocket mateRocket) {
-	//todo: determine how breeding two DNA strands will work, and implement.
-	GeneticCode newDNA;
-	return newDNA;
+void Rocket::breedWith(Rocket& mateRocket, GeneticCode& newDNA) { //typedef std::vector<Gene> GeneticCode;
+	//pre: this.DNA.length == DNA_LENGTH && mateRocket.DNA.length == 100
+	int crossoverIndex = rand() % DNA_LENGTH;
+	//printf("\nthis.DNA: %d\tmate.DNA: %d\tCrossover: %d\n", DNA.size(), mateRocket.DNA.size(), crossoverIndex);
+
+	for (int i = 0; i < crossoverIndex; i++) {
+		//printf("i: %d", i);
+		newDNA.push_back(DNA[i]); 
+	}
+	//printf("Out of first part of crossover.\n\n");
+	for (int i = crossoverIndex; i < DNA_LENGTH; i++) {
+		newDNA.push_back(mateRocket.DNA[i]);
+	}
+}
+
+void Rocket::mutate() {
+
+	for (auto geneToMutate : DNA) {
+		int mutationChance = rand() % 100;
+		if (mutationChance <= RATE_OF_MUTATION) {
+			//gotta change this gene.
+			geneToMutate = generateRandomGene();
+		}
+	}
 }
 
 void Rocket::executeGene(Gene commandSet) {
@@ -116,11 +134,13 @@ void Rocket::executeDNA() {
 	}
 }
 
+void Rocket::swapDNAWithExecutedDNA(){
+	DNA.swap(executedDNA);
+}
+
 void Rocket::move(float magnitude) {
-	printf("pre-move: (%f, %f)  ", xPosition, yPosition);
 	this->xPosition += (sin(this->angle) * (magnitude * ROCKET_SPEED));
 	this->yPosition -= (cos(this->angle) * (magnitude * ROCKET_SPEED));
-	printf("post move: (%f,%f)", xPosition, yPosition);
 }
 
 void Rocket::turn(float magnitude) {
@@ -140,4 +160,10 @@ bool Rocket::DNAIsExecuted() {
 		return false;
 	}
 	return true;
+}
+
+void Rocket::resetPosition(float x, float y) {
+	xPosition = x;
+	yPosition = y;
+	angle = 0;
 }
